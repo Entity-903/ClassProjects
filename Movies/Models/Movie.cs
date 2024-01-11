@@ -9,6 +9,8 @@
         public int? Year { get; set; }
         public float? Rating { get; set; }
 
+        public DateTime? ReleaseDate { get; set; }
+
         // Always need an empty constructor
         public Movie() { }
 
