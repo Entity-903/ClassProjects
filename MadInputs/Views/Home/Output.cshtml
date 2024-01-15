@@ -1,0 +1,26 @@
+﻿@{
+	ViewData["Title"] = "Your Story";
+}
+<h1>@ViewData["Title"]</h1>
+
+@if (!string.IsNullOrEmpty(ViewBag.First) && !string.IsNullOrEmpty(ViewBag.Second) && !string.IsNullOrEmpty(ViewBag.Third) && !string.IsNullOrEmpty(ViewBag.Fourth) && !string.IsNullOrEmpty(ViewBag.Second))
+{
+			<p>    
+				Today, every student has a computer small enough to fit
+				into his <b><u>@ViewBag.First</u></b>. He can solve any math problem by simply 
+				pushing the computer's little <b><u>@ViewBag.Second</u></b>. Computers
+				can add, multiply, divide, and <b><u>@ViewBag.Third</u></b>.
+				They can also be better than a(n) <b><u>@ViewBag.Fourth</u></b>. 
+				Some computers are <b><u>@ViewBag.Fifth</u></b>.
+			</p>
+}
+else
+{
+		<div class="alert-danger">
+			<h4>At least one field was left empty!</h4>
+		</div>
+}
+
+<div class="text-center">
+<a href="~/home/input">Return to Input</a>
+</div>
