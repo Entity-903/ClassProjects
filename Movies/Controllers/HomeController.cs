@@ -14,6 +14,19 @@ namespace Movies.Controllers
             _logger = logger;
         }
 
+        [Route("pizza/{id?}")] // Attribute Routing
+        public IActionResult RouteTest(int? id)
+        {
+            return Content($"id = {id?.ToString() ?? "NULL"}");
+        }
+
+        [Route("home/colors/{*colors}")]
+        public IActionResult Colors(string colors)
+        {
+            var colorList = colors.Split('/');
+            return Content(string.Join(",", colorList));
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -27,6 +40,8 @@ namespace Movies.Controllers
             // ?? = Null coalescing operator, if variable is not null, do left; if null, do right;
 		}
 
+        //[Route("/Home/Index")]
+        //[Route("stuff")] // <-- Permanently takes over routing for Privacy
 		public IActionResult Privacy(string id)
         {
             return View();
