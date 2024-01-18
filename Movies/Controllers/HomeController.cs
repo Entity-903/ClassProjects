@@ -19,7 +19,15 @@ namespace Movies.Controllers
             return View();
         }
 
-        public IActionResult Privacy(string id)
+		public IActionResult ParamTest(int? id, string s)
+		{
+            //return Content("Stuff"); // Content just returns simple text
+            return Content($"id = {id?.ToString() ?? "NULL"} {s}");
+            //id? = Nullable Variable
+            // ?? = Null coalescing operator, if variable is not null, do left; if null, do right;
+		}
+
+		public IActionResult Privacy(string id)
         {
             return View();
         }
@@ -53,6 +61,11 @@ namespace Movies.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public IActionResult AlternateViews()
+        {
+            return View();
         }
     }
 }

@@ -10,4 +10,19 @@
 
     <a asp-controller="Home" asp-action="Privacy" asp-fragment="bob"
     asp-route-id=pizza>Privacy</a>
+
+    @* ASP-Route example*@
+    <a asp-controller="Home" asp-action="ParamTest" asp-route-id="77" 
+    asp-route-s="Routinator">Route Example</a>
+
+    @* Query Parameter example*@
+    <a href="/home/ParamTest?id=77&s=Queryinator">Query Parameter example</a>
+
+    @* Form Parameters example*@
+    <form asp-controller="Home" asp-action="ParamTest" method="post">
+        <input type="text" name="s" />
+        <input type="text" hidden name="id" value="43" />
+        <button type="submit">Submit Form Param Test</button>
+    </form>
+
 </div>

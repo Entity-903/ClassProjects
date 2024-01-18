@@ -9,16 +9,19 @@
         public int? Year { get; set; }
         public float? Rating { get; set; }
 
+        public string Image { get; set; }
+
         public DateTime? ReleaseDate { get; set; }
 
         // Always need an empty constructor
         public Movie() { }
 
-        public Movie(string title, int? year, float? rating)
+        public Movie(string title, int? year, float? rating, string image)
         { 
             Title = title; 
             Year = year; 
-            Rating = rating; 
+            Rating = rating;
+            Image = image;
         }
     }
 

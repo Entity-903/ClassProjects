@@ -9,4 +9,11 @@ else
 		<h3>@Model.Title</h3>
 		<h3>@Model.Year</h3>
 		<h3>@Model.Rating</h3>
+		<img src="@Model.Image" width="200" />
+		<input type="hidden" name="id" value="@Model.Id" />
+}
+
+@if (Model.ReleaseDate.HasValue)
+{
+	Model.ReleaseDate.Value.ToShortDateString();
 }

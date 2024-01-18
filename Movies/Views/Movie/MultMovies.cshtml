@@ -8,12 +8,19 @@
 }
 else
 {
-	foreach (Movie m in Model)
+	<div class="row">
+	@foreach (Movie m in Model)
 	{
 		@*<h3>@m.Title</h3>
 		<h3>@m.Year</h3>
 		<h3>@m.Rating</h3>*@
 
+		//LoanedDate.Value.ToShortDateString
+
+		<div class="col-4">
 		<partial name="_MoviePartialView.cshtml" for="@m" />
+		</div>
+		
 	}
+	</div>
 }
