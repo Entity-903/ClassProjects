@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using VideoGameLibrary.Models;
 
 namespace VideoGameLibrary.Controllers
 {
@@ -7,9 +8,11 @@ namespace VideoGameLibrary.Controllers
 
         private static List<Game> MovieList = new List<Game>
     {
-        new Game("A Series of Unfortunate Events", 2004, 4.0f, ""),
-        new Game("Everything Everywhere All At Once", 2022, 4.5f, ""),
-        new Game("Spider-Man Across the Spider-Verse", 2023, 5f, "/images/AcrossTheSpiderVerse.jpg")
+        new Game("Deep Rock Galactic", "PC", "FPS", "T", 2020, "DRG.jpg"),
+        new Game("Team Fortress 2", "PC", "FPS", "M", 2007, "TF2.jpg"),
+        new Game("Ori and the Blind Forest", "PC", "Metroidvania", "E", 2015, "BlindForest.avif")//,
+        //new Game("Ori and the Will of the Wisps"),
+        //new Game("Lethal Company")
     };
 
         public IActionResult Collection()
