@@ -12,6 +12,61 @@ namespace Movies.Controllers
         new Movie("Spider-Man Across the Spider-Verse", 2023, 5f, "/images/AcrossTheSpiderVerse.jpg")
     };
 
+        public IActionResult Delete(int? id)
+        {
+			if (id == null)
+			{
+				return NotFound();
+			}
+			else
+			{
+				int i = MovieList.FindIndex(m => m.Id == id);
+				if (i == -1)
+				{
+                    return NotFound();
+				}
+                MovieList.RemoveAt(i);
+				TempData["Success"] = "Movie deleted";
+				return RedirectToAction("MultMovies", "Movie");
+			}
+        }
+
+        [HttpGet] // Loading the edit page
+        public IActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                ViewData["Error"] = "Movie ID not found";
+                return View();
+            }
+            else
+            {
+                Movie? m = MovieList.Where(m => m.Id == id).FirstOrDefault();
+                if (m == null)
+                {
+                    ViewData["Error"] = "Could not find movie with this ID";
+                }
+                return View(m);
+            }
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Movie m)
+        {
+            int i = MovieList.FindIndex(x => x.Id == m.Id);
+            if (i != -1)
+            {
+                MovieList[i] = m;
+                TempData["Success"] = "Movie updated";
+                return RedirectToAction("MultMovies", "Movie");
+            }
+            else
+            {
+				TempData["Success"] = "Update failed successfully";
+				return RedirectToAction("MultMovies", "Movie");
+			}
+        }
+
         [HttpGet]
         public IActionResult Add()
         {

@@ -10,14 +10,14 @@ namespace VideoGameLibrary.Controllers
     {
         new Game("Deep Rock Galactic", "PC", "FPS", "T", 2020, "DRG.jpg"),
         new Game("Team Fortress 2", "PC", "FPS", "M", 2007, "TF2.jpg"),
-        new Game("Ori and the Blind Forest", "PC", "Metroidvania", "E", 2015, "BlindForest.avif")//,
-        //new Game("Ori and the Will of the Wisps"),
-        //new Game("Lethal Company")
+        new Game("Ori and the Blind Forest", "PC", "Metroidvania", "E", 2015, "BlindForest.avif"),
+        new Game("Ori and the Will of the Wisps", "PC", "Metroidvania", "E", 2020, "WillOfTheWisps.jpg"),
+        new Game("Lethal Company", "PC", "Horror", "Not Rated", 2023, "LethalCompany.jpg")
     };
 
         public IActionResult Collection()
         {
-            return View();
+            return View(MovieList);
         }
 
         public IActionResult Loan()
@@ -26,3 +26,5 @@ namespace VideoGameLibrary.Controllers
         }
     }
 }
+
+// Add _GamePartialView
