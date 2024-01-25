@@ -1,29 +1,34 @@
 ﻿@model Game
 
-@if (Game == null)
+@if (Model == null)
 {
-				<h2>No Movie Provided</h2>
+	<h2>No Game Provided</h2>
 }
 else
 {
-				<h3>@Game.Title</h3>
-				<h3>@Game.Platform</h3>
-				<h3>@Game.Genre</h3>
-				<h3>@Game.AgeRating</h3>
-				<h3>@Game.Year</h3>
-				<img src="@Game.Image" width="200" />
+	<h3>@Model.Title</h3>
+	<img src="@Model.Image" width="300" />
+	<h3>@Model.Platform</h3>
+	<h3>@Model.Genre</h3>
+	<h3>@Model.AgeRating</h3>
+	<h3>@Model.Year</h3>
+
+	@if (!Model.LoanDate.HasValue)
+	{
+		<form asp-controller="Game" asp-action="Collection" method="post">
+			<input type="hidden" name="id" value="@Model.Id" />
+			<input type="text" name="LoanedTo" class="form-control" />
+			<button type="submit" class="btn btn-primary">Loan</button>
+		</form>
+	}
+	else
+	{
+			<h3><b><i>@Model.LoanedTo</i></b></h3>
+			<h3><b><i>@Model.LoanDate.Value.ToShortDateString()</i></b></h3>
+			<form asp-controller="Game" asp-action="Collection" method="post">
 				<input type="hidden" name="id" value="@Model.Id" />
-
-
-@*				<a asp-controller="Game" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-secondary mx-2">
-						<i class="bi bi-wrench"></i> Edit
-				</a>
-				<a asp-controller="Game" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger mx-2">
-						<i class="bi bi-twitter-x"></i> Shadow Realm
-				</a>*@
-}
-
-@if (Game.LoanDate.HasValue)
-{
-	Game.LaonDate.Value.ToShortDateString();
+				<input hidden type="reset" name="LoanedTo" class="form-control" />
+				<button type="submit" class="btn btn-primary">Return</button>
+			</form>
+	}
 }

@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<Game>
 
-<h1>Movie List</h1>
+<h1>Game List: @Model.Count()</h1>
 
 @if (Model == null || Model.Count() == 0)
 {
@@ -11,14 +11,9 @@ else
 		<div class="row">
 		@foreach (Game m in Model)
 		{
-			@*<h3>@m.Title</h3>
-		<h3>@m.Year</h3>
-		<h3>@m.Rating</h3>*@
 
-			//LoanedDate.Value.ToShortDateString
-
-				<div class="col-4">
-				<partial name="_MoviePartialView.cshtml" for="@m" />
+				<div class="col-3 border text-center">
+				<partial name="_GamePartialView.cshtml" for="@m" />
 				</div>
 
 		}

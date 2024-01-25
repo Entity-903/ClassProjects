@@ -11,7 +11,7 @@
 		public string AgeRating { get; set; }
 		public int Year { get; set; }
 		public string Image { get; set; }
-		public DateTime? LoanedTo { get; set; } = null;
+		public string? LoanedTo { get; set; } = null;
 		public DateTime? LoanDate { get; set; } = null;
 
 		// Always need an empty constructor

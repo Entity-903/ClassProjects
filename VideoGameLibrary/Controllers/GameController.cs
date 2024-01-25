@@ -3,28 +3,45 @@ using VideoGameLibrary.Models;
 
 namespace VideoGameLibrary.Controllers
 {
-    public class GameController : Controller
-    {
+	public class GameController : Controller
+	{
 
-        private static List<Game> MovieList = new List<Game>
-    {
-        new Game("Deep Rock Galactic", "PC", "FPS", "T", 2020, "DRG.jpg"),
-        new Game("Team Fortress 2", "PC", "FPS", "M", 2007, "TF2.jpg"),
-        new Game("Ori and the Blind Forest", "PC", "Metroidvania", "E", 2015, "BlindForest.avif"),
-        new Game("Ori and the Will of the Wisps", "PC", "Metroidvania", "E", 2020, "WillOfTheWisps.jpg"),
-        new Game("Lethal Company", "PC", "Horror", "Not Rated", 2023, "LethalCompany.jpg")
-    };
+		private static List<Game> GameList = new List<Game>
+	{
+		new Game("Deep Rock Galactic", "PC", "FPS", "T", 2020, "/images/DRG.jpg"),
+		new Game("Team Fortress 2", "PC", "FPS", "M", 2007, "/images/TF2.jpg"),
+		new Game("Ori and the Blind Forest", "PC", "Metroidvania", "E", 2015, "/images/BlindForest.jpg"),
+		new Game("Ori and the Will of the Wisps", "PC", "Metroidvania", "E", 2020, "/images/WillOfTheWisps.jpg"),
+		new Game("Lethal Company", "PC", "Horror", "Not Rated", 2023, "/images/LethalCompany.jpg")
+	};
 
-        public IActionResult Collection()
-        {
-            return View(MovieList);
-        }
+		[HttpGet]
+		public IActionResult Collection()
+		{
+			return View(GameList);
+		}
 
-        public IActionResult Loan()
-        {
-            return View();
-        }
-    }
+		[HttpPost]
+		public IActionResult Collection(string? LoanedTo, int id)
+		{
+			Game g = GameList.Find(x => x.Id == id);
+
+			if (string.IsNullOrEmpty(LoanedTo))
+			{
+				g.LoanDate = null;
+			}
+			else
+			{
+				g.LoanedTo = LoanedTo;
+				g.LoanDate = DateTime.Now;
+			}
+
+			return View(GameList);
+		}
+
+		public IActionResult Loan()
+		{
+			return View();
+		}
+	}
 }
-
-// Add _GamePartialView
