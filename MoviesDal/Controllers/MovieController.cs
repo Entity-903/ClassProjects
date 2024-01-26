@@ -1,16 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Movies.Models;
+using MoviesDal.Data;
+using MoviesDal.Interfaces;
 
 namespace Movies.Controllers
 {
 	public class MovieController : Controller
 	{
-		private static List<Movie> MovieList = new List<Movie>
-	{
-		new Movie("A Series of Unfortunate Events", 2004, 4.0f, "/images/Unfortunate.jpg"),
-		new Movie("Everything Everywhere All At Once", 2022, 4.5f, "/images/EverythingEverywhere.jpg"),
-		new Movie("Spider-Man Across the Spider-Verse", 2023, 5f, "/images/AcrossTheSpiderVerse.jpg")
-	};
+		IDataAccessLayer dal = new MovieListDAL();
 
 		public IActionResult Delete(int? id)
 		{
@@ -20,14 +17,17 @@ namespace Movies.Controllers
 			}
 			else
 			{
-				int i = MovieList.FindIndex(m => m.Id == id);
-				if (i == -1)
-				{
-					return NotFound();
-				}
-				MovieList.RemoveAt(i);
+				//	int i = MovieList.FindIndex(m => m.Id == id);
+				//	if (i == -1)
+				//	{
+				//		return NotFound();
+				//	}
+				//	MovieList.RemoveAt(i);
+				dal.RemoveMovie((int)id);
+				
 				TempData["Success"] = "Movie deleted";
 				return RedirectToAction("MultMovies", "Movie");
+				//return View("MultMovies", dal.GetMovies());
 			}
 		}
 
@@ -41,7 +41,7 @@ namespace Movies.Controllers
 			}
 			else
 			{
-				Movie? m = MovieList.Where(m => m.Id == id).FirstOrDefault();
+				Movie? m = dal.GetMovie((int)id);
 				if (m == null)
 				{
 					ViewData["Error"] = "Could not find movie with this ID";
@@ -50,21 +50,22 @@ namespace Movies.Controllers
 			}
 		}
 
-		[HttpPost]
+		[HttpPost] // Save
 		public IActionResult Edit(Movie m)
 		{
-			int i = MovieList.FindIndex(x => x.Id == m.Id);
-			if (i != -1)
-			{
-				MovieList[i] = m;
-				TempData["Success"] = "Movie updated";
-				return RedirectToAction("MultMovies", "Movie");
-			}
-			else
-			{
+			//int i = MovieList.FindIndex(x => x.Id == m.Id);
+			//if (i != -1)
+			//{
+			//MovieList[i] = m;
+			//TempData["Success"] = "Movie updated";
+			//return RedirectToAction("MultMovies", "Movie");
+			//}
+			//else
+			//{
+				dal.UpdateMovie(m);
 				TempData["Success"] = "Update failed successfully";
 				return RedirectToAction("MultMovies", "Movie");
-			}
+			//}
 		}
 
 		[HttpGet]
@@ -85,7 +86,7 @@ namespace Movies.Controllers
 			}
 			if (ModelState.IsValid)
 			{
-				MovieList.Add(m);
+				dal.AddMovie(m);
 				return RedirectToAction("MultMovies", "Movie");
 				//return View();
 			}
@@ -94,7 +95,7 @@ namespace Movies.Controllers
 
 		public IActionResult MultMovies()
 		{
-			return View(MovieList);
+			return View(dal.GetMovies());
 		}
 
 		//public IActionResult LoanMovie(int ID)

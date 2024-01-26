@@ -40,10 +40,10 @@ namespace Movies
             //    defaults: new {controller = "Home", action = "Colors" });
 
             // Catch all error route to Error cshtml view
-            app.MapControllerRoute(
-                name: "TheFinalCatchAll",
-                pattern: "{*any}",
-                defaults: new { controller = "Home", action="error" });
+            //app.MapControllerRoute(
+            //    name: "TheFinalCatchAll",
+            //    pattern: "{*any}",
+            //    defaults: new { controller = "Home", action="error" });
 
             app.Run();
         }
