@@ -5,8 +5,8 @@ namespace Validation.Models
 {
 	public class UserInfo
 	{
-		private static int nextID = 0;
-		public int? Id { get; set; } = nextID++;
+		//private static int nextID = 0;
+		//public int? Id { get; set; } = nextID++;
 
 		[Required(ErrorMessage = "Name is required!")]
 		[MaxLength(255)]
@@ -14,8 +14,7 @@ namespace Validation.Models
 
 		[Required(ErrorMessage = "Age is required!")]
 		[Range(5, int.MaxValue, ErrorMessage = "Age cannot be less than 5!")]
-		public int Age { get; set; }
-
+		public int? Age { get; set; }
 		
 		public string? Street { get; set; }
 

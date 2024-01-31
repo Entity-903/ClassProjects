@@ -22,12 +22,21 @@ namespace Validation.Controllers
 		[HttpPost]
 		public IActionResult ValidateForm(UserInfo userInfo)
 		{
+
+
 			if ((userInfo.Street == null && userInfo.City == null && userInfo.State == null && userInfo.ZipCode == null) ||
 				(userInfo.Street != null && userInfo.City != null && userInfo.State != null && userInfo.ZipCode != null))
 			{
-				return RedirectToAction("Success", "Home");
+				if (ModelState.IsValid)
+				{
+					return RedirectToAction("Success", "Home");
+				}
 			}
-				return View();
+			else
+			{
+				ModelState.AddModelError("Street", "Address cannot be incomplete!");
+			}
+			return View();
 		}
 
 		public IActionResult Success()
