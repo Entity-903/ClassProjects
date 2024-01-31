@@ -10,6 +10,11 @@ else
 {
 	<h4>@TempData["Success"]</h4>
 
+	<form class="d-flex" asp-controller="Movie" asp-action="Search" method="post">
+		<input name="key" class="form-control me-2" type="search" placeholder="Search" />
+		<button class="btn btn-secondary my-2" type="submit">Search</button>
+	</form>
+
 	<div class="row">
 	@foreach (Movie m in Model)
 	{

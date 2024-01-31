@@ -13,12 +13,24 @@ namespace Validation.Controllers
 			_logger = logger;
 		}
 
-		public IActionResult Index()
+		[HttpGet]
+		public IActionResult ValidateForm()
 		{
 			return View();
 		}
 
-		public IActionResult Privacy()
+		[HttpPost]
+		public IActionResult ValidateForm(UserInfo userInfo)
+		{
+			if ((userInfo.Street == null && userInfo.City == null && userInfo.State == null && userInfo.ZipCode == null) ||
+				(userInfo.Street != null && userInfo.City != null && userInfo.State != null && userInfo.ZipCode != null))
+			{
+				return RedirectToAction("Success", "Home");
+			}
+				return View();
+		}
+
+		public IActionResult Success()
 		{
 			return View();
 		}

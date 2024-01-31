@@ -9,6 +9,7 @@ namespace MoviesDal.Data
 	{
 		new Movie("A Series of Unfortunate Events", 2004, 4.0f, "/images/Unfortunate.jpg"),
 		new Movie("Everything Everywhere All At Once", 2022, 4.5f, "/images/EverythingEverywhere.jpg"),
+		new Movie("Spider-Man 2", 2004, 5.0f, "/images/Spider-Man_2.jpg"),
 		new Movie("Spider-Man Across the Spider-Verse", 2023, 5f, "/images/AcrossTheSpiderVerse.jpg")
 	};
 
@@ -20,7 +21,6 @@ namespace MoviesDal.Data
 		public Movie? GetMovie(int id)
 		{
 			Movie? foundMovie = MovieList.Where(m => m.Id == id).FirstOrDefault();
-
 			return foundMovie;
 		}
 

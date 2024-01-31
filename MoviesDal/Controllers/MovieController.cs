@@ -63,7 +63,7 @@ namespace Movies.Controllers
 			//else
 			//{
 				dal.UpdateMovie(m);
-				TempData["Success"] = "Update failed successfully";
+				TempData["Success"] = "Movie Updated!";
 				return RedirectToAction("MultMovies", "Movie");
 			//}
 		}
@@ -104,13 +104,20 @@ namespace Movies.Controllers
 		//	oneMovie ReleaseDate = DateTime.Now; // DateTime.Now = current date
 
 		//	//return Redirect("/Movies/MultMovies");
-		// return View("MultMovies");
+		//  return View("MultMovies");
 		//}
 
 		public IActionResult DisplayMovie()
 		{
 			Movie m = new Movie("Tron", 1982, 4.7f, "");
 			return View(m);
+		}
+
+		[HttpPost]
+		public IActionResult Search(string? key)
+		{
+			if (string.IsNullOrEmpty(key)) return View("MultMovies", dal.GetMovies());
+			return View("MultMovies", dal.GetMovies().Where(x => x.Title.ToLower().Contains(key.ToLower())));
 		}
 
 		public IActionResult Index()
