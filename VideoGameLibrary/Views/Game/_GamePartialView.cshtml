@@ -23,12 +23,24 @@ else
 	}
 	else
 	{
-			<h3><b><i>@Model.LoanedTo</i></b></h3>
-			<h3><b><i>@Model.LoanDate.Value.ToShortDateString()</i></b></h3>
-			<form asp-controller="Game" asp-action="Collection" method="post">
-				<input type="hidden" name="id" value="@Model.Id" />
-				<input hidden type="reset" name="LoanedTo" class="form-control" />
-				<button type="submit" class="btn btn-primary">Return</button>
-			</form>
+		<h3><b><i>@Model.LoanedTo</i></b></h3>
+		<h3><b><i>@Model.LoanDate.Value.ToShortDateString()</i></b></h3>
+		<form asp-controller="Game" asp-action="Collection" method="post">
+			<input hidden name="id" value="@Model.Id" />
+			<input hidden type="reset" name="LoanedTo" class="form-control" />
+			<button type="submit" class="btn btn-primary">Return</button>
+		</form>
 	}
+	@*
+	<form asp-controller="Game" asp-action="Collection" method="post">
+
+	</form>
+	*@
+
+		<a asp-controller="Game" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-secondary mx-2">
+				<i class="bi bi-wrench"></i> Edit
+		</a>
+		<a asp-controller="Game" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger mx-2">
+				<i class="bi bi-twitter-x"></i> Delete
+		</a>
 }
