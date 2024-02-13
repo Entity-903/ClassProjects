@@ -33,11 +33,6 @@ namespace VideoGameLibrary.Controllers
 			return View(dal.GetGames());
 		}
 
-		public IActionResult Loan()
-		{
-			return View();
-		}
-
 		[HttpGet]
 		public IActionResult Add()
 		{
